@@ -1,0 +1,47 @@
+{{log 'encountergen' this}}
+
+<form>
+    <div class="flexrow">
+        <div>
+            <label>Encounter difficulty</label>
+            <select name="difficultymod" data-difficultymod="difficulty">
+                    {{#select difficulty}}
+                    <option value="-1">Easy</option>
+                    <option value="0">Average</option>
+                    <option value="+1">Challenging</option>
+                    <option value="+2">Hard</option>
+                    <option value="+3">Epic</option>
+                    {{/select}}
+            </select>
+        </div>
+        <div>
+            <label>APL</label>
+            <input type="number" value="{{apl}}" data-avepl='{{this.apl}}' name="apl"/>
+        </div>
+    </div>
+    <div class="flexrow">
+        <button type="button" title="Import" data-action="import"><i class="fas fa-plus"></i>Import</button>
+        <button type="button" title="New random encounter" data-action="new"><i class="fas fa-undo"></i>Random encounter</button>
+    </div> 
+    <table>
+        <tr>
+            <th>CR</th>
+            <th>Name</th>
+            <th>Type</th>
+            <th>Environment</th>
+            <th>Organization</th>
+        </tr>
+        {{#each this}} 
+        <tr data-alien-index="{{@key}}">
+            <td class="sfenc-cr"><div>{{data.details.cr}}</div></td>
+            <td class="sfenc-name"><div data-action='rendersheet'>{{name}}</div></td>
+            <td class="sfenc-type"><div>{{data.details.type}}</div></td>
+            <td class="sfenc-environment"><div>{{data.details.environment}}</div></td>
+            <td class="sfenc-organization"><div>{{data.details.organization}}</div></td>
+            <td class="sfenc-reroll" style="width: 5%;"><button type="button" title="Reroll this alien" data-action="reroll">
+                <i class="fas fa-undo"></i>
+            </button></td>
+        </tr>
+        {{/each}}
+    </table>
+</form>

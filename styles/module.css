@@ -1,0 +1,5 @@
+.sfenc-name:hover {
+    box-shadow: none;
+    text-shadow: 0 0 5px red;
+    cursor: pointer;
+  }
