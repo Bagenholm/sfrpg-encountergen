@@ -3,3 +3,8 @@
     text-shadow: 0 0 5px red;
     cursor: pointer;
   }
+
+.sfenc-table {
+    text-align: center; 
+    vertical-align: middle;
+}

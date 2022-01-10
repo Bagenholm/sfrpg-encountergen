@@ -39,7 +39,7 @@ class SfrpgEncountergenForm extends FormApplication {
         const overrides = {
             template: SfrpgEncountergen.TEMPLATE,
             height: 'auto',
-            width: 'auto',
+            width: '800',
             submitOnChange: true,
             closeOnSubmit: false,
             resizable: true,
@@ -300,7 +300,7 @@ class SfrpgEncountergenData {
     static indexArchive() {
         if(SfrpgEncountergenData.INDEXED_ARCHIVE.length == 0) {
             game.packs.get("sfrpg.alien-archives")
-                .getIndex({ fields: ["name", "data.details.type", "data.details.cr", "data.details.environment", "data.details.organization"] })
+                .getIndex({ fields: ["name", "data.details.type", "data.details.cr", "data.details.environment", "data.details.organization", "img"] })
                 .then((resp) => SfrpgEncountergenData.INDEXED_ARCHIVE = resp, () => SfrpgEncountergen.log(true, 'Error reading the Alien Archive compendium'));
         }
     }
