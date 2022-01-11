@@ -2,37 +2,37 @@
 
 <form>
     <div class="flexrow">
-        <div>
+        <div title="An estimation of the encounter difficulty and how it changes the encounter CR">
             <label>Encounter difficulty</label>
             <select name="difficultymod" data-difficultymod="difficulty">
-                    {{#select difficulty}}
-                    <option value="-1">Easy</option>
+                    {{#select options.difficulty}}
+                    <option value="-1">Easy (-1)</option>
                     <option value="0">Average</option>
-                    <option value="+1">Challenging</option>
-                    <option value="+2">Hard</option>
-                    <option value="+3">Epic</option>
+                    <option value="+1">Challenging (+1)</option>
+                    <option value="+2">Hard (+2)</option>
+                    <option value="+3">Epic (+3)</option>
                     {{/select}}
             </select>
         </div>
-        <div>
-            <label>APL</label>
-            <input type="number" value="{{apl}}" data-avepl='{{this.apl}}' name="apl"/>
+        <div title="APL (Average Party Level) is the party's total levels, divided by number of party members. -1 if 3 or fewer players, +1 if 6 or more players">
+            APL:
+            <input type="number" value="{{options.apl}}" data-avepl='{{options.apl}}' name="apl"/>
         </div>
     </div>
     <div class="flexrow">
-        <button type="button" title="Import" data-action="import"><i class="fas fa-plus"></i>Import</button>
+        <button type="button" title="Import NPCs to the actor directory" data-action="import"><i class="fas fa-plus"></i>Import</button>
         <button type="button" title="New random encounter" data-action="new"><i class="fas fa-undo"></i>Random encounter</button>
     </div> 
     <table>
         <tr>
-            <th>Img</th>
-            <th>CR</th>
-            <th>Name</th>
-            <th>Type</th>
-            <th>Environment</th>
-            <th>Organization</th>
+            <th style="width: 70px">Img</th>
+            <th style="width: 40px">CR</th>
+            <th class="flex1">Name</th>
+            <th class="flex1">Type</th>
+            <th class="flex1">Environment</th>
+            <th class="flex1">Organization</th>
         </tr>
-        {{#each this}} 
+        {{#each encounter}} 
         <tr class="sfenc-table" data-alien-index="{{@key}}">
             <td class="sfenc-img"><img src={{img}} style="height: 70px; width:70px;" title="{{img}}"></td>
             <td class="sfenc-cr"><div>{{data.details.cr}}</div></td>

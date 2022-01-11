@@ -43,6 +43,8 @@ class SfrpgEncountergenForm extends FormApplication {
             submitOnChange: true,
             closeOnSubmit: false,
             resizable: true,
+            apl: 1,
+            difficulty: SfrpgEncountergenConfig.difficulty,
         }
 
         const mergedOptions = foundry.utils.mergeObject(defaults, overrides);
@@ -51,7 +53,7 @@ class SfrpgEncountergenForm extends FormApplication {
     }
 
     getData(options) {
-        return SfrpgEncountergenData.ENCOUNTER;
+        return {"options": options, "encounter": SfrpgEncountergenData.ENCOUNTER};
     }
 
     activateListeners(html) {
@@ -96,7 +98,6 @@ class SfrpgEncountergenForm extends FormApplication {
                 let index = clickedElement.parents('[data-alien-index]')?.data().alienIndex;
                 let alienId = SfrpgEncountergenData.ENCOUNTER[index]._id;
                 game.packs.get("sfrpg.alien-archives").getDocument(alienId).then((actor) => actor.sheet.render(true));
-                //SfrpgEncountergenData.ENCOUNTER[index].sheet.render(true);
             }
         }
         
@@ -104,6 +105,8 @@ class SfrpgEncountergenForm extends FormApplication {
     }
 
     async _updateObject(event, formData) {
+        this.options.apl = formData.apl;
+        this.options.difficulty = formData.difficultymod;
         let targetCr = parseInt(formData.difficultymod) + parseInt(formData.apl);
         if(Number.isInteger(targetCr)) {
             SfrpgEncountergenData.TARGET_CR = parseInt(formData.difficultymod) + parseInt(formData.apl);
@@ -112,15 +115,7 @@ class SfrpgEncountergenForm extends FormApplication {
 }
 
 class SfrpgEncountergenConfig {
-      static difficulty = {
-        "Easy": -1,
-        "Average": 0,
-        "Challenging": 1,
-        "Hard": 2,
-        "Epic": 3,
-      };
-
-      static loadButton() {
+     static loadButton() {
         if (!game.user.isGM && !Actor.canUserCreate(game.user)) {
             return;
         }
@@ -157,14 +152,14 @@ class SfrpgEncountergenData {
 
     static INDEXED_ARCHIVE = "";
     static ENCOUNTER = [];
-    static TARGET_CR = 5;
+    static TARGET_CR = 0;
 
     /**
      * 
      * @param {int the wanted encounter CR} encounterCr 
      * @returns {Array with the encounter actors' CR, e. g. [4, 2, 2]}
      */
-    static getEnemySpread(encounterCr) { //TODO: handle low CR values
+    static getEnemySpread(encounterCr) { 
         let combinations = this.getCrSpread(encounterCr);
 
         return this.getRandomIndexFromArray(combinations)
@@ -300,7 +295,7 @@ class SfrpgEncountergenData {
     static indexArchive() {
         if(SfrpgEncountergenData.INDEXED_ARCHIVE.length == 0) {
             game.packs.get("sfrpg.alien-archives")
-                .getIndex({ fields: ["name", "data.details.type", "data.details.cr", "data.details.environment", "data.details.organization", "img"] })
+                .getIndex({ fields: ["name", "data.details.type", "data.details.cr", "data.details.environment", "data.details.organization", "img", "data.items"] })
                 .then((resp) => SfrpgEncountergenData.INDEXED_ARCHIVE = resp, () => SfrpgEncountergen.log(true, 'Error reading the Alien Archive compendium'));
         }
     }
