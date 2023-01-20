@@ -35,11 +35,11 @@
         {{#each encounter}} 
         <tr class="sfenc-table" data-alien-index="{{@key}}">
             <td class="sfenc-img"><img src={{img}} style="height: 70px; width:70px;" title="{{img}}"></td>
-            <td class="sfenc-cr"><div>{{data.details.cr}}</div></td>
+            <td class="sfenc-cr"><div>{{system.details.cr}}</div></td>
             <td class="sfenc-name"><div data-action='rendersheet'>{{name}}</div></td>
-            <td class="sfenc-type"><div>{{data.details.type}}</div></td>
-            <td class="sfenc-environment"><div>{{data.details.environment}}</div></td>
-            <td class="sfenc-organization"><div>{{data.details.organization}}</div></td>
+            <td class="sfenc-type"><div>{{system.details.type}}</div></td>
+            <td class="sfenc-environment"><div>{{system.details.environment}}</div></td>
+            <td class="sfenc-organization"><div>{{system.details.organization}}</div></td>
             <td class="sfenc-reroll" style="width: 5%;"><button type="button" title="Reroll this alien" data-action="reroll">
                 <i class="fas fa-undo"></i>
             </button></td>

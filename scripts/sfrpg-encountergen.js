@@ -76,15 +76,15 @@ class SfrpgEncountergenForm extends FormApplication {
                 let importedActors = [];
 
                 SfrpgEncountergenData.ENCOUNTER.forEach((doc) => 
-                    game.packs.get("sfrpg.alien-archives").getDocument(doc._id).then((actor) => Actor.create(actor.data))
-                )
+                    game.packs.get("sfrpg.alien-archives").getDocument(doc._id).then((actor) => Actor.create(actor))
+                );
 
                 break;
             }
 
             case 'reroll': {
                 let index = clickedElement.parents('[data-alien-index]')?.data().alienIndex;
-                let cr = SfrpgEncountergenData.ENCOUNTER[index]?.data.details.cr;
+                let cr = SfrpgEncountergenData.ENCOUNTER[index]?.system.details.cr;
                 let newAlien = SfrpgEncountergenData.getSingleEnemyByCr(cr);
 
                 SfrpgEncountergenData.ENCOUNTER[index] = newAlien;
@@ -284,7 +284,7 @@ class SfrpgEncountergenData {
     }
 
     static filterIndexByCr(cr) {
-        let filtered = this.INDEXED_ARCHIVE.filter((alien) => alien.data?.details.cr == cr);
+        let filtered = this.INDEXED_ARCHIVE.filter((alien) => alien.system?.details.cr == cr);
         return filtered;
     }
 
@@ -295,7 +295,13 @@ class SfrpgEncountergenData {
     static indexArchive() {
         if(SfrpgEncountergenData.INDEXED_ARCHIVE.length == 0) {
             game.packs.get("sfrpg.alien-archives")
-                .getIndex({ fields: ["name", "data.details.type", "data.details.cr", "data.details.environment", "data.details.organization", "img", "data.items"] })
+                .getIndex({ fields: ["name", 
+                                    "system.details.type", 
+                                    "system.details.cr", 
+                                    "system.details.environment", 
+                                    "system.details.organization", 
+                                    "img", 
+                                    "system.items"] })
                 .then((resp) => SfrpgEncountergenData.INDEXED_ARCHIVE = resp, () => SfrpgEncountergen.log(true, 'Error reading the Alien Archive compendium'));
         }
     }
