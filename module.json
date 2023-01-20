@@ -1,35 +1,49 @@
 {
-    "name": "sfrpg-encountergen",
-    "title": "SFRPG Encountergen",
-    "description": "",
-    "version": "1.0.0",
-    "library": "false",
-    "minimumCoreVersion": "0.8.8",
-    "compatibleCoreVersion": "9",
-    "authors": "Sputt",
-    "scripts": [
-        "/scripts/sfrpg-encountergen.js"
-    ],
-    "styles": [
-        "/styles/module.css"
-    ],
+  "title": "SFRPG Encountergen",
+  "version": "1.2.0",
+  "authors": [
+    {
+      "name": "Sputt",
+      "flags": {}
+    }
+  ],
+  "scripts": [
+    "/scripts/sfrpg-encountergen.js"
+  ],
+  "styles": [
+    "/styles/module.css"
+  ],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json",
+      "flags": {}
+    }
+  ],
+  "url": "https://github.com/Bagenholm/sfrpg-encountergen",
+  "manifest": "https://github.com/Bagenholm/sfrpg-encountergen/releases/latest/download/module.json",
+  "download": "https://github.com/Bagenholm/sfrpg-encountergen/releases/download/1.2.0/module.zip",
+  "media": [
+    {
+      "type": "icon",
+      "url": "https://avatars2.githubusercontent.com/u/71292812?s=400&u=ccdb4eeb7abf551ca8f314e5a9bfd0479a4d3d41&v=4",
+      "loop": false,
+      "flags": {}
+    }
+  ],
+  "id": "sfrpg-encountergen",
+  "relationships": {
     "systems": [
-        "sfrpg"
-    ],
-    "languages": [
-        {
-            "lang": "en",
-            "name": "English",
-            "path": "languages/en.json"
-        }
-    ],
-    "url": "https://github.com/Bagenholm/sfrpg-encountergen",
-    "manifest": "https://github.com/Bagenholm/sfrpg-encountergen/releases/latest/download/module.json",
-    "download": "https://github.com/Bagenholm/sfrpg-encountergen/releases/download/1.0.0/module.zip",
-    "media": [
-        {
-            "type": "icon",
-            "url": "https://avatars2.githubusercontent.com/u/71292812?s=400&u=ccdb4eeb7abf551ca8f314e5a9bfd0479a4d3d41&v=4"
-        }
+      {
+        "id": "sfrpg",
+        "type": "system",
+        "compatibility": {}
+      }
     ]
+  },
+  "compatibility": {
+    "minimum": "10",
+    "verified": "10"
+  }
 }
