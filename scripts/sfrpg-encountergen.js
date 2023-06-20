@@ -7,18 +7,23 @@ Hooks.once('ready', async function() {
 });
 
 Hooks.on("changeSidebarTab", async (app, html) => {
+    if (app.id == "actors") {
+        SfrpgEncountergenConfig.loadButton();
+    }
+});
+
+Hooks.on("renderSidebarTab", async (app, html) => {
     if (app.options.id == "actors") {
         SfrpgEncountergenConfig.loadButton();
     }
 });
 
 
-
 Hooks.once('devModeReady', ({ registerPackageDebugFlag }) => {
     registerPackageDebugFlag(SfrpgEncountergen.ID);
 });
 
-Hooks.on("renderTokenHUD", (...args) => TempGen.tokenIcon(...args));
+//Hooks.on("renderTokenHUD", (...args) => TempGen.tokenIcon(...args));
 
 class SfrpgEncountergen {
     static ID = 'sfrpg-encountergen';

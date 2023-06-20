@@ -1,6 +1,6 @@
 # SFRPG Encountergen
 
-The entire module was made while listening to the fantastic Starfinder actual play podcast Southern Tomfoolery. <3
+The entire module was made while listening to the fantastic Starfinder actual play podcast Strange Tablefellows (thestfnetwork.com). <3
 
 Once the module is activated, there's a new button at the bottom of the Actor directory. 
 
